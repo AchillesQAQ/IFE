@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>IFE JavaScript task4</title>
+    <style>
+        *{padding: 0; margin: 0;}
+        li{ list-style:none; display: inline-block;padding:5px 5px;background-color:rgb(51, 129, 219);margin:20px 5px;
+        }
+        ul {padding-top: 20px;}
+    </style>
+</head>
+<body>
+    <input type="text" id="text">
+    <button id="left_in">左侧入</button>
+    <button id="right_in">右侧入</button>
+    <button id="left_out">左侧出</button>
+    <button id="right_out">右侧出</button>
+    <ul id="ul">
+        <li><span>3</span></li>
+        <li><span>3</span></li>
+        <li><span>3</span></li>
+        <li><span>3</span></li>
+        <li><span>3</span></li>
+    </ul>
+
+    <script>
+        var left_in = document.getElementById("left_in");
+        var left_out = document.getElementById("left_out");
+        var right_in = document.getElementById("right_in");
+        var right_out = document.getElementById("right_out");
+        var ul = document.getElementById("ul");
+        var text = document.getElementById("text");
+
+        left_in.onclick = function(){
+            
+            var li_text = document.createTextNode(text.value);
+            var li = document.createElement("li");
+            li.appendChild(li_text);
+            ul.insertBefore(li,ul.firstChild);
+        }
+        right_in.onclick = function(){
+            var li_text = document.createTextNode(text.value);
+            var li = document.createElement("li");
+            li.appendChild(li_text);
+            ul.appendChild(li); 
+        }
+        left_out.onclick = function(){
+            
+            ul.firstChild.remove();
+        }
+        right_out.onclick = function(){
+            ul.lastChild.remove();
+        }
+    </script>
+    
+</body>
+</html>
