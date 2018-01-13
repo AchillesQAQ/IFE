@@ -1,2 +1,2 @@
 百度前端学院
-IFE 2016 JavaScrip 练习题
+IFE 2016 JavaScript练习题
