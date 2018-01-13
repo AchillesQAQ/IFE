@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>IFE 2016 JavaScript task5</title>
+</head>
+<body>
+   <div class="content">
+        <ul id="content_ul">
+                <li id="content_li" class="content_li">50 <span id="content_li_num"></span></li>
+                <li id="content_li" class="content_li">60 <span id="content_li_num"></span></li>
+                <li id="content_li" class="content_li">40 <span id="content_li_num"></span></li>
+                <li id="content_li" class="content_li">55 <span id="content_li_num"></span></li>
+                <li id="content_li" class="content_li">66 <span id="content_li_num"></span></li>
+                <li id="content_li" class="content_li">73 <span id="content_li_num"></span></li>
+                <li id="content_li" class="content_li">38 <span id="content_li_num"></span></li>
+                <li id="content_li" class="content_li">30 <span id="content_li_num"></span></li>
+                
+            </ul>
+   </div>
+
+   <div class="input">
+       <div class="leftArea">
+           <span id="leftSpan"></span>
+       </div>
+       <div class="rightArea">
+           <span id="rightArea"></span>
+       </div>
+       <h3>输入你想输入的数字</h3>
+       <input type="text" id="textArea" placeholder="输入10-100以内的值，队列中只能有60个哈"><span id="hintSpan">在这里输入哟！</span>
+   </div>
+
+   <div class="control">
+       <ul id="control_ul">
+           <li id="control_li" class="control_li">左侧入</li>
+           <li id="control_li" class="control_li">右侧入</li>
+           <li id="control_li" class="control_li">正序排序</li>
+           <li id="control_li" class="control_li">逆序排序</li>
+           <li id="control_li" class="control_li">左侧出</li>
+           <li id="control_li" class="control_li">右侧出</li>
+           
+       </ul>
+   </div>
+   
+   
+</body>
+<script type="text/javascript"> 
+    window.onload = function(){
+        var content_ul = document.getElementById("content_ul");
+        var content_li = document.getElementById("content_li");
+        
+        var left_in = document.getElementsByClassName("control_li")[0];
+        var right_in = document.getElementsByClassName("control_li")[1];
+        var left_sort = document.getElementsByClassName("control_li")[2];
+        var right_sort = document.getElementsByClassName("control_li")[3];
+        var left_out = document.getElementsByClassName("control_li")[4];
+        var right_out = document.getElementsByClassName("control_li")[5];
+        var input_value = document.getElementById("textArea");
+        var hint_span = document.getElementById("hintSpan");
+
+        input_value.addEventListener("input",myFunction);
+        function myFunction(event){
+            if(event.target.value>=10&&event.target.value<=100){
+                hint_span.innerHTML="输入成功，嘻嘻！";
+            }
+            else{
+                hint_span.innerHTML="输入的值要在10-100之内哟！";
+            }
+        }
+
+        left_in.onclick = function(){
+            var text_value = Number(input_value.value);
+            if(text_value >= 10 && text_value <= 100){
+                if(text_value!="" && typeof(text_value) =="number" &&!isNaN(text_value)){
+                    if(document.getElementsByClassName('content_li').length<=60){
+                        var new_li = document.createElement("li");
+                        new_li.id = "content_li";
+                        new_li.innerHTML = text_value + "<span id='content_li_num'></span>";
+                        content_ul.insertBefore(new_li,content_ul.childNodes[0]);
+                        content_ul.childNodes[0].children[0].style.height = text_value + "%";
+                      //input_value = "";
+                    }
+                    else{
+                        alert("队列中不能超过60个哦~");
+                        input_value = "";
+                    }
+                }
+                else if(isNan(text_value)){
+                    hint_span.innerHTML = "输入的好像不是数字哦~";
+                }else if(text_value = ""){
+                    hint_span.innerHTML = "输入值不能为空！";
+                }else{
+                    hint_span.innerHTML = "输入的值要在10-100之内哟！"
+                }
+            }
+        }
+
+        right_in.onclick = function(){
+            var text_value = Number(input_value.value);
+            if(text_value >= 10 && text_value <= 100){
+                if(text_value!="" && typeof(text_value) =="number" &&!isNaN(text_value)){
+                    if(document.getElementsByClassName('content_li').length<=60){
+                        var new_li = document.createElement("li");
+                        new_li.id = "content_li";
+                        new_li.innerHTML = text_value + "<span id='content_li_num'></span>";
+                        content_ul.appendChild(new_li);
+                        content_ul.lastChild.lastChild.style.height = text_value + "%";
+                        input_value = "";
+                    }
+                    else{
+                        alert("队列中不能超过60个哦~");
+                        input_value = "";
+                    }
+                }
+                else if(isNan(text_value)){
+                    hint_span.innerHTML = "输入的好像不是数字哦~";
+                }else if(text_value = ""){
+                    hint_span.innerHTML = "输入值不能为空！";
+                }else{
+                    hint_span.innerHTML = "输入的值要在10-100之内哟！"
+                }
+            }
+        } 
+
+        left_out.onclick = function(){
+            alert(content_ul.children[0].innerText);
+            content_ul.removeChild(content.ul.children[0]);
+        }
+
+        right_out.onclick = function(){
+            alert(content.lastChild.innerText);
+            content_ul.removeChild(content_ul.lastChild);
+        }
+
+        for(let i= 0;i<content_li.length;i++){
+            content_ul.children[i].children[0].style.height=content_ul.children[i].innerText +"%";
+        }
+
+        left_sort.onclick = function(){
+
+            //获取数组
+            var content_li_len = content_li.length;
+            var li_arr = new Array();
+            for(var i = 0; i < content_li_len; i++){
+                var content_li_text = content_ul.children[i].innerText;
+                li_arr.push(content_li_text);
+            }
+
+            //正序排序
+            function insert_left_sort(arr){
+                if(arr.length <= 1){
+                    return arr;
+                }
+            for(i=0;i<arr.length;i++){
+                for(j = i-1;j>0;j--){
+                    if(arr[j+1]>arr[j]){
+                        var temp = arr[j+1];
+                        arr[j+1] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+            return arr;
+            }
+            
+            var li_arr_sort_left = insert_left_sort(li_arr);
+            for(let i = 0;i < content_li_len;i++){
+                content_ul.children[i].innerText = li_arr_sort_left[i];
+                content_ul.children[i].innerHTML += "<span class='content_li_num'></span>";
+                //数值高度变化可视化
+                setTimeout(function(){
+                    content_ul.children[i].children[0].style.height = li_arr_arr[i] + "%";
+                },100);
+            }
+        }
+
+        right_sort.onclick= function(){
+            var content_li_len= content_li.length;
+            var li_arr = new Array();
+            for(var i =0;i<content_li_len;i++){
+                var content_li_text = content_ul.children[i].innerText;
+                li_arr.push(content_li_text);
+            }
+
+            //逆序排序
+            function insert_right_sort(arr){
+                if(arr.length <= 1){
+                    return arr;
+                }   
+                for(let i = 0;i< content_li_len;i++){
+                    for(var j= i-1;j>=0 ;j++){
+                        if(arr[j+1]>arr[j]){
+                            var temp = arr[j+1];
+                            arr[j+1] = arr[j];
+                            arr[j] = temp;
+                        }
+                    }
+                
+                }
+                return arr;
+            
+            }
+
+            var li_arr_sort_right = insert_right_sort(li_arr);
+            for(let i = 0;i < content_li_len;i++){
+                content_ul.children[i].innerText = li_arr_sort_right[i];
+                content_ul.children[i].innerHTML += "<span class='content_li_num'></span>";
+                //数值高度变化可视化
+                setTimeout(function(){
+                    content_ul.children[i].children[0].style.height = li_arr_arr[i] + "%";
+                },100);
+            }
+        }
+    }
+
+</script>
+</html>
