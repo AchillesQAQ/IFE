@@ -2,13 +2,213 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>IFE 2016 JavaScript task5</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            font-family: "Microsoft YaHei";
+            list-style: none;
+            color: #000;
+        }
+        body{
+            font-size: 12px;
+            font-family:  "Microsoft Yahei";
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+        a{
+	        color:#000;
+            text-decoration:none;
+        }
+        .content{
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);/* Safari 和 Chrome */
+            -o-transform: translateX(-50%); /* Opera */
+            width: 200%;
+            height: auto;
+        }
+        ul.content_ul{
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform:translateX(-50%);
+            width: auto;
+            height: 135px;
+            text-align: center;
+        }
+        li.content_li{
+            display: inline-block;
+            float: left;
+            position: relative;
+            margin-top: 35px;
+            margin-right: 5px;
+            width: 20px;
+            height: 100%;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 300px;
+            text-align: center;
+            color: #434A54;
+            background-color: #434A54;
+            border: 1px solid #dd6723;
+            transition: all 0.5s;
+            cursor: pointer;
+
+        }
+        .content_li:hover{
+            transform: scale(1.2);
+         }
+         #content_li_num{
+             position: absolute;
+             bottom: 0;
+             left: 0;
+             width: 100%;
+             height: 0;
+             background-color: #dd6723;
+             transition: all 0.5s;
+             z-index: 1;
+         }
+
+         .input{
+             display: block;
+             position: absolute;
+             top: 450px;
+             left: 50%;
+             transform: translateX(-50%);
+             width: 50%;
+             height: 50px;
+             background-color:#434A54;
+             border-radius: 5px;
+         }
+         .input:hover{
+             animation: input_hover 0.9s forwards;
+             animation-iteration-count: infinite;
+             animation-direction: alternate;
+         }
+        .input:hover #leftSpan{
+            width: 200px;
+            transform: scale(0.5);
+         }
+         .input:hover #rightSpan{
+             width: 200px;
+             transform: scale(0.5);
+         }
+         @keyframes input_hover{
+            0% {box-shadow: 0px 0px 0px #dd6723;}
+            100%{box-shadow: 0px 0px 15px #dd6723}
+         }
+         .leftArea,.rightArea{
+             display: block;
+             position: absolute;
+             top: -42px;
+             left: 50%;
+             width: 235px;
+             height: 20px;
+             
+         }
+         #leftSpan,#rightSpan{
+             display: block;
+             position: absolute;
+             width: 15px;
+             height: 15px;
+             background-color: #434A54;
+             border-radius: 10px;
+             transition: all 1s;
+
+         }
+         .leftArea{
+             transform: translateX(-50%);
+         }
+         #leftSpan{
+             right: 220px;
+             transform: rotateZ(180deg);
+         }
+
+         .rightArea{
+             transform: translateX(-50%);
+         }
+         #rightSpan{
+             left: 220px;
+             transform: rotateZ(-180deg);
+         }
+        #hintSpan{
+            position: absolute;
+            bottom: -110%;
+            left: 50%;
+            transform: translateX(-45%);
+            padding: 0 20px;
+            height: 50px;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 50px;
+            text-align: center;
+        }
+        h3{
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 50px;
+            
+        }
+        #textArea{
+            display: inline-block;
+            position: absolute;
+            top: 5px;
+            bottom:5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 98%;
+            height: auto;
+            background-color: #fff;
+            border: none;
+            border-radius: 1px;
+            outline: none;
+        }
+        .control{
+            position:absolute;
+	        top:570px;
+	        left:50%;
+            width:80%;
+            height:50px;
+            transform:translateX(-50%);
+            -webkit-transform:translateX(-50%);
+            -o-transform:translateX(-50%);
+
+        }
+        .control_li{
+            float: left;
+            margin:0 auto;
+            margin-right:calc(4% / 6);
+            width:16%;
+            height:50px;
+            font-size:23px;
+            font-weight:700;
+            line-height:50px;
+            text-align:center;
+            color:#fff;
+            background-color:#434A54;
+            border-radius:5px;
+            transition:all 0.5s;
+            cursor:pointer;
+        }
+        control_li:hover,content_li:hover{
+            box-shadow:5px 5px 10px #434A54;
+        }
+
+    </style>
 </head>
 <body>
    <div class="content">
-        <ul id="content_ul">
+        <ul id="content_ul" class="content_ul">
                 <li id="content_li" class="content_li">50 <span id="content_li_num"></span></li>
                 <li id="content_li" class="content_li">60 <span id="content_li_num"></span></li>
                 <li id="content_li" class="content_li">40 <span id="content_li_num"></span></li>
@@ -17,6 +217,9 @@
                 <li id="content_li" class="content_li">73 <span id="content_li_num"></span></li>
                 <li id="content_li" class="content_li">38 <span id="content_li_num"></span></li>
                 <li id="content_li" class="content_li">30 <span id="content_li_num"></span></li>
+                <li id="content_li" class="content_li">93 <span id="content_li_num"></span></li>
+                <li id="content_li" class="content_li">49 <span id="content_li_num"></span></li>
+                <li id="content_li" class="content_li">88 <span id="content_li_num"></span></li>
                 
             </ul>
    </div>
@@ -26,7 +229,7 @@
            <span id="leftSpan"></span>
        </div>
        <div class="rightArea">
-           <span id="rightArea"></span>
+           <span id="rightSpan"></span>
        </div>
        <h3>输入你想输入的数字</h3>
        <input type="text" id="textArea" placeholder="输入10-100以内的值，队列中只能有60个哈"><span id="hintSpan">在这里输入哟！</span>
@@ -49,7 +252,7 @@
 <script type="text/javascript"> 
     window.onload = function(){
         var content_ul = document.getElementById("content_ul");
-        var content_li = document.getElementById("content_li");
+        var content_li = document.getElementsByClassName("content_li");
         
         var left_in = document.getElementsByClassName("control_li")[0];
         var right_in = document.getElementsByClassName("control_li")[1];
@@ -76,8 +279,8 @@
                 if(text_value!="" && typeof(text_value) =="number" &&!isNaN(text_value)){
                     if(document.getElementsByClassName('content_li').length<=60){
                         var new_li = document.createElement("li");
-                        new_li.id = "content_li";
-                        new_li.innerHTML = text_value + "<span id='content_li_num'></span>";
+                        new_li.className = "content_li";
+                        new_li.innerHTML += text_value + "<span id='content_li_num' class='content_li_num'></span>";
                         content_ul.insertBefore(new_li,content_ul.childNodes[0]);
                         content_ul.childNodes[0].children[0].style.height = text_value + "%";
                       //input_value = "";
@@ -103,8 +306,8 @@
                 if(text_value!="" && typeof(text_value) =="number" &&!isNaN(text_value)){
                     if(document.getElementsByClassName('content_li').length<=60){
                         var new_li = document.createElement("li");
-                        new_li.id = "content_li";
-                        new_li.innerHTML = text_value + "<span id='content_li_num'></span>";
+                        new_li.className = "content_li";
+                        new_li.innerHTML += text_value + "<span id='content_li_num' class='content_li_num'></span>";
                         content_ul.appendChild(new_li);
                         content_ul.lastChild.lastChild.style.height = text_value + "%";
                         input_value = "";
@@ -126,11 +329,11 @@
 
         left_out.onclick = function(){
             alert(content_ul.children[0].innerText);
-            content_ul.removeChild(content.ul.children[0]);
+            content_ul.removeChild(content_ul.children[0]);
         }
 
         right_out.onclick = function(){
-            alert(content.lastChild.innerText);
+            alert(content_ul.children[content_li.length -1 ].innerText);
             content_ul.removeChild(content_ul.lastChild);
         }
 
@@ -142,36 +345,22 @@
 
             //获取数组
             var content_li_len = content_li.length;
+           
             var li_arr = new Array();
-            for(var i = 0; i < content_li_len; i++){
+            for(let i = 0; i < content_li_len; i++){
                 var content_li_text = content_ul.children[i].innerText;
                 li_arr.push(content_li_text);
             }
 
-            //正序排序
-            function insert_left_sort(arr){
-                if(arr.length <= 1){
-                    return arr;
-                }
-            for(i=0;i<arr.length;i++){
-                for(j = i-1;j>0;j--){
-                    if(arr[j+1]>arr[j]){
-                        var temp = arr[j+1];
-                        arr[j+1] = arr[j];
-                        arr[j] = temp;
-                    }
-                }
-            }
-            return arr;
-            }
+  
             
             var li_arr_sort_left = insert_left_sort(li_arr);
             for(let i = 0;i < content_li_len;i++){
                 content_ul.children[i].innerText = li_arr_sort_left[i];
-                content_ul.children[i].innerHTML += "<span class='content_li_num'></span>";
+                content_ul.children[i].innerHTML += "<span id='content_li_num' class='content_li_num'></span>";
                 //数值高度变化可视化
                 setTimeout(function(){
-                    content_ul.children[i].children[0].style.height = li_arr_arr[i] + "%";
+                    content_ul.children[i].children[0].style.height = li_arr_sort_left[i] +"%";
                 },100);
             }
         }
@@ -184,13 +373,42 @@
                 li_arr.push(content_li_text);
             }
 
+
+
+            var li_arr_sort_right = insert_right_sort(li_arr);
+            for(let i = 0;i < content_li_len;i++){
+                content_ul.children[i].innerText = li_arr_sort_right[i];
+                content_ul.children[i].innerHTML += "<span id='content_li_num' class='content_li_num'></span>";
+                //数值高度变化可视化
+                setTimeout(function(){
+                    content_ul.children[i].children[0].style.height = li_arr_sort_right[i] +"%";
+                },100);
+            }
+        }
+    }
+              //正序排序
+              function insert_left_sort(arr){
+                if(arr.length <= 1){
+                    return arr;
+                }
+            for(var i=0;i<arr.length;i++){
+                for(var j = i-1;j>=0;j--){
+                    if(arr[j+1]<arr[j]){
+                        var temp = arr[j+1];
+                        arr[j+1] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+            return arr;
+            }
             //逆序排序
             function insert_right_sort(arr){
                 if(arr.length <= 1){
                     return arr;
                 }   
-                for(let i = 0;i< content_li_len;i++){
-                    for(var j= i-1;j>=0 ;j++){
+                for(var i = 0;i< arr.length;i++){
+                    for(var j= i-1;j>=0 ;j--){
                         if(arr[j+1]>arr[j]){
                             var temp = arr[j+1];
                             arr[j+1] = arr[j];
@@ -200,20 +418,6 @@
                 
                 }
                 return arr;
-            
-            }
-
-            var li_arr_sort_right = insert_right_sort(li_arr);
-            for(let i = 0;i < content_li_len;i++){
-                content_ul.children[i].innerText = li_arr_sort_right[i];
-                content_ul.children[i].innerHTML += "<span class='content_li_num'></span>";
-                //数值高度变化可视化
-                setTimeout(function(){
-                    content_ul.children[i].children[0].style.height = li_arr_arr[i] + "%";
-                },100);
-            }
-        }
-    }
-
+             }
 </script>
 </html>
